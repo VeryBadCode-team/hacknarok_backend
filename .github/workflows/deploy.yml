@@ -1,0 +1,19 @@
+name: Production Deploy
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to 51.38.129.57
+        uses: appleboy/ssh-action@master
+        with:
+          username: github
+          host: 51.38.129.57
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: 'cd /home/projects/hacknarok-api.verybadcode.com && ./deploy.sh'
+
+
